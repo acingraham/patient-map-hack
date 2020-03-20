@@ -1,0 +1,25 @@
+html {
+  font-family: system-ui, sans-serif;
+  font-size: 1.25rem;
+}
+
+body {
+  margin: 0;
+  padding: 0 1.5rem;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h2 {
+  color: rgb(80, 81, 219);
+  display: inline-block;
+  font-family: PostGrotesk-Light, sans-serif;
+  font-size: 60px;
+  font-weight: 300;
+  line-height: 84px;
+  text-align: center;
+  width: 100%
+}

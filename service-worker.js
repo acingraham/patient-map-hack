@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/patient-map-hack/precache-manifest.f65b6848154ca168840ec322dfceca4d.js"
+  "/patient-map-hack/precache-manifest.c47c52123a3fae75cf0b0b2d864e4659.js"
 );
 
 self.addEventListener('message', (event) => {

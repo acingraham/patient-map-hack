@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { scaleQuantize } from "d3-scale";
+import { csv } from "d3-fetch";
 
-const geoUrl = "./zip3.topo.json";
+const geoUrl = "/zip3.topo.json";
 
 const colorScale = scaleQuantize()
   .domain([1, 10])
@@ -27,8 +28,15 @@ const getRandomItem = () => {
   };
 };
 
-
 const dataMap = {}
+
+for (let i = 0; i < 10; i++) {
+  for (let j = 0; j < 10; j++) {
+    for (let k = 0; k < 10; k++) {
+      dataMap[`${i}${j}${k}`] = 0;
+    }
+  }
+}
 
 const MapChart = () => {
   const [data, setData] = useState([]);
@@ -49,17 +57,49 @@ const MapChart = () => {
     setData(dataArray);
   };
 
-  useEffect(() => {
-    // https://www.bls.gov/lau/
-    /*
-    csv("/unemployment-by-county-2017.csv").then(counties => {
-      setData(counties);
+  let hour = 0;
+  const genData = m => {
+    if (!m[hour]) {
+      return;
+    }
+    m[hour].forEach(item => {
+      dataMap[item.id] = (dataMap[item.id] || 0) + 1;
     });
-    */
 
-    generateData();
-    setInterval(generateData, 3000);
+    const dataArray = [];
+    for (const id in dataMap) {
+      dataArray.push({
+        id,
+        visited: dataMap[id],
+      });
+    }
+    setData(dataArray);
+    hour++;
+  };
 
+  const convertDatetimeToHour = item => {
+    console.log('item', item);
+    const roundedDownDatetime = item.visitdatetime.split('-');
+    roundedDownDatetime.pop();
+    roundedDownDatetime.pop();
+    // item.visitDatetime = roundedDownDatetime.join('-');
+    item.visitDatetime = roundedDownDatetime.pop().split(' ').pop();
+  };
+
+  useEffect(() => {
+    //generateData();
+    csv("/patientids.txt").then(res => {
+      console.log(res);
+      let m = {};
+      res.forEach(row => {
+        convertDatetimeToHour(row);
+        m[row.visitDatetime] = m[row.visitDatetime] || [];
+        m[row.visitDatetime].push(row);
+        // m[row.zipCode] = (m[row.zipCode] || 0) + 1
+      });
+      console.log(m);
+      //setInterval(() => genData(m), 3000);
+    });
   }, []);
 
   return (

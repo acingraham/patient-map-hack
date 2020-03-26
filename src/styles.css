@@ -11,6 +11,7 @@ body {
 svg {
   display: inline-block;
   vertical-align: middle;
+  width: 80%;
 }
 
 h2 {
@@ -21,10 +22,41 @@ h2 {
   font-weight: 300;
   line-height: 84px;
   margin-bottom: 0;
+  margin-top: 0;
+  text-align: center;
+  width: 100%
+}
+
+h3 {
+  color: rgb(80, 81, 219);
+  display: inline-block;
+  font-family: PostGrotesk-Light, sans-serif;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 84px;
+  margin-bottom: 0;
+  text-align: center;
+  width: 100%
+}
+
+h4 {
+  display: inline-block;
+  font-family: PostGrotesk-Light, sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 0px;
+  margin-bottom: 0;
+  margin-top: 0;
   text-align: center;
   width: 100%
 }
 
 * {
-  transition: 3s;
+  transition: 1s;
+}
+
+.body-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
 }

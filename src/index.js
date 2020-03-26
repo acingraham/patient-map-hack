@@ -9,7 +9,9 @@ function App() {
   return (
     <div>
       <h2>The Flatiron Network</h2>
-      <MapChart />
+      <div className="body-wrapper">
+        <MapChart />
+      </div>
     </div>
   );
 }
